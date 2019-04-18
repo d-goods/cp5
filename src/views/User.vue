@@ -30,7 +30,7 @@
           <button @click="submitOrder">Add Order</button>
         </div>
       </div>
-      <h2><i>Your</i> Current Work Orders:</h2>
+      <h2>Your Current Work Orders:</h2>
       <div class="workOrderDB">
         <table>
           <tr>

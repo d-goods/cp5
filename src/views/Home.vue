@@ -32,10 +32,20 @@
       </select>
       <h3 v-else>n/a - no orders available</h3>
     </div>
+    <div class="email">
+        <h3>Email Address:</h3>
+        <input v-model="recipient" placeholder="yours@whatever.com">
+      </div>
     <div class="submit">
-      <button @click="sendEmail">Send Time</button>
+      <button @click="sendEmail">Submit</button>
     </div>
   </div>
+  <h2 style="text-align: center; margin: auto 0; padding: 6em;"><i>NOTE: </i>
+    I wrote this website for the AV department on campus (that I work for) to keep track of work orders. 
+    If it looks familiar, that's because I updated it for the sake of this assignment.
+    Once you have registered for an account, you'll be able to edit and add your own work orders to the selection pool for email submission.
+    Afterwards, come back and email yourself the data you entered to get a feel for how it works.</h2>
+  <a style="text-align: center; margin-top: 3em;" href="https://github.com/d-goods/cp5">GitHub</a>
 </div>
 </template>
 
@@ -59,7 +69,8 @@ export default {
         'Delivery'
       ],
       order: null,
-      orders: []
+      orders: [],
+      recipient: ''
     }
   },
   created: function() {
@@ -112,6 +123,7 @@ export default {
             'Crew: ' + this.crew + '<br>' +
             'Time Worked: ' + this.computedTime;
           await axios.post('/api/send-email', {
+            recipient: this.recipient,
             subject: "Time for " + this.order.name,
             message: body
           });

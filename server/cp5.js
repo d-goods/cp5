@@ -108,25 +108,25 @@ app.delete('/api/orders/:id', auth.verifyToken, User.verify, async (req, res) =>
 
 app.post('/api/send-email', (req, res) => {
   let transporter = nodeMailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      requireTLS: true,
-      auth: {
-        user: 'oitavstudent@gmail.com',
-        pass: 'oitemail'
-      }
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    requireTLS: true,
+    auth: {
+      user: 'byucs260winter2019@gmail.com',
+      pass: 'brigham\'s-beard'
+    }
   });
   let mailOptions = {
-      to: 'd_goodsell@byu.edu',
-      subject: req.body.subject,
-      html: req.body.message
+    to: req.body.recipient,
+    subject: req.body.subject,
+    html: req.body.message
   };
   transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-          return console.log(error);
-      }
-      console.log('Message %s sent: %s', info.messageId, info.response);
+    if (error) {
+      return console.log(error);
+    }
+    console.log('Message %s sent: %s', info.messageId, info.response);
   });
   res.sendStatus(200);
 });
@@ -134,6 +134,6 @@ app.post('/api/send-email', (req, res) => {
 app.use("/api/users", users.routes);
 
 let server = app.listen(3015, () => {
-    let port = server.address().port;
-    console.log("Server started at http://localhost:%s", port);
+  let port = server.address().port;
+  console.log("Server started at http://localhost:%s", port);
 });
