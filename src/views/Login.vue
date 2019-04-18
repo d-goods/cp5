@@ -109,4 +109,9 @@ input {
 .pure-controls button {
   margin: auto;
 }
+
+.error {
+  color: white;
+  text-align: center;
+}
 </style>
